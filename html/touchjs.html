@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            margin: 10px auto;
+            background: #f00;
+            /* transform: rotate(45deg); */
+        }
+
+        #te {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">pinch</div>
+    <div class="box">rotate</div>
+    <div class="box">pinch+rotate</div>
+    <div class="box" id="te">pressmove</div>
+    <div class="box">dobule tap</div>
+    <div class="box">swipe</div>
+    <div class="box">long tap</div>
+    <div class="box">tap</div>
+</body>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/touch.min.js"></script>
+<script>
+    let boxs = document.querySelectorAll(".box");
+    console.log(boxs);
+    touch.on(boxs[0], "pinch", function () {
+        console.dir("this")
+        $(this).css("transform", "scale(2)");
+    });
+    touch.on(boxs[1], "rotate", function () {
+        console.dir(this)
+        $(this).css("transform", "rotate(45deg)");
+    });
+    touch.on(boxs[3], "drag", function (ev) {
+        console.log(ev.x, ev.y)
+        console.dir(boxs[3])
+        console.dir(ev)
+        $(this).css({
+            "top": ev.x,
+            "left": ev.y
+        });
+    });
+    touch.on(boxs[5], "swipe", function () {
+        $(this).css("background", "#000");
+    });
+</script>
+
+</html>
